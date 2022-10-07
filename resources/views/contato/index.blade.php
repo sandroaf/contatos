@@ -7,13 +7,26 @@
             {{Session::get('mensagem')}}
         </div>
     @endif
-
+    {{Form::open(['url'=>'contatos/buscar','method'=>'GET'])}}
+        <div class="row">
+            <div class="col-sm-3">
+                <a class="btn btn-success" href="{{url('contatos/create')}}">Criar</a>
+            </div>
+            <div class="col-sm-9">
+                <div class="input-group ml-5">
+                    {{Form::text('busca',$busca,['class'=>'form-control','required','placeholder'=>'buscar'])}}
+                    &nbsp;
+                    <span class="input-group-btn">
+                        {{Form::submit('Buscar',['class'=>'btn btn-secondary'])}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    {{Form::close()}}
     <br />
-    <a class="btn btn-success" href="{{url('contatos/create')}}">Criar</a>
-    <br /><br />
     <table class="table table-striped">
         @foreach ($contatos as $contato)
-        <tr>
+            <tr>
                 <td>
                     <a href="{{url('contatos/'.$contato->id)}}">{{$contato->nome}}</a>
                 </td>

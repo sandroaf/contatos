@@ -16,8 +16,19 @@ class ContatosController extends Controller
     public function index()
     {
         $contatos = Contato::all();
-        return view('contato.index',array('contatos' => $contatos));
+        return view('contato.index',array('contatos' => $contatos,'busca'=>null));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function buscar(Request $request) {
+        $contatos = Contato::where('nome','LIKE','%'.$request->input('busca').'%')->orwhere('email','LIKE','%'.$request->input('busca').'%')->orwhere('cidade','LIKE','%'.$request->input('busca').'%')->orwhere('estado','LIKE','%'.$request->input('busca').'%')->get();
+        return view('contato.index',array('contatos' => $contatos,'busca'=>$request->input('busca')));
+    }
+
 
     /**
      * Show the form for creating a new resource.
