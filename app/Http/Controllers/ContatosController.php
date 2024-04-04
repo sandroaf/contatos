@@ -49,7 +49,7 @@ class ContatosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nome' => 'required|min:3]',
+            'nome' => 'required|min:3',
             'email' => 'required|e-mail',
             'telefone' => 'required',
             'cidade' => 'required',
